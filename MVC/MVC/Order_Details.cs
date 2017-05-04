@@ -7,17 +7,20 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MVC.Models
+namespace MVC
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class sysdiagram
+    public partial class Order_Details
     {
-        public string name { get; set; }
-        public int principal_id { get; set; }
-        public int diagram_id { get; set; }
-        public Nullable<int> version { get; set; }
-        public byte[] definition { get; set; }
+        public int OrderID { get; set; }
+        public int ProductID { get; set; }
+        public decimal UnitPrice { get; set; }
+        public short Quantity { get; set; }
+        public float Discount { get; set; }
+    
+        public virtual Orders Orders { get; set; }
+        public virtual Products Products { get; set; }
     }
 }

@@ -7,23 +7,24 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MVC.Models
+namespace MVC
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Region
+    public partial class Shippers
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Region()
+        public Shippers()
         {
-            this.Territories = new HashSet<Territory>();
+            this.Orders = new HashSet<Orders>();
         }
     
-        public int RegionID { get; set; }
-        public string RegionDescription { get; set; }
+        public int ShipperID { get; set; }
+        public string CompanyName { get; set; }
+        public string Phone { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Territory> Territories { get; set; }
+        public virtual ICollection<Orders> Orders { get; set; }
     }
 }

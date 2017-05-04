@@ -7,19 +7,19 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MVC.Models
+namespace MVC
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Employee
+    public partial class Employees
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Employee()
+        public Employees()
         {
-            this.Employees1 = new HashSet<Employee>();
-            this.Orders = new HashSet<Order>();
-            this.Territories = new HashSet<Territory>();
+            this.Employees1 = new HashSet<Employees>();
+            this.Orders = new HashSet<Orders>();
+            this.Territories = new HashSet<Territories>();
         }
     
         public int EmployeeID { get; set; }
@@ -42,11 +42,11 @@ namespace MVC.Models
         public string PhotoPath { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Employee> Employees1 { get; set; }
-        public virtual Employee Employee1 { get; set; }
+        public virtual ICollection<Employees> Employees1 { get; set; }
+        public virtual Employees Employees2 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Order> Orders { get; set; }
+        public virtual ICollection<Orders> Orders { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Territory> Territories { get; set; }
+        public virtual ICollection<Territories> Territories { get; set; }
     }
 }

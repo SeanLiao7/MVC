@@ -7,18 +7,18 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MVC.Models
+namespace MVC
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Customer
+    public partial class Customers
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Customer()
+        public Customers()
         {
-            this.Orders = new HashSet<Order>();
-            this.CustomerDemographics = new HashSet<CustomerDemographic>();
+            this.Orders = new HashSet<Orders>();
+            this.CustomerDemographics = new HashSet<CustomerDemographics>();
         }
     
         public string CustomerID { get; set; }
@@ -34,8 +34,8 @@ namespace MVC.Models
         public string Fax { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Order> Orders { get; set; }
+        public virtual ICollection<Orders> Orders { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CustomerDemographic> CustomerDemographics { get; set; }
+        public virtual ICollection<CustomerDemographics> CustomerDemographics { get; set; }
     }
 }
