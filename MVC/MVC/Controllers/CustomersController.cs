@@ -1,127 +1,119 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using MVC;
+using MVC.Service;
 
 namespace MVC.Controllers
 {
     public class CustomersController : Controller
     {
-        private NORTHWNDEntities db = new NORTHWNDEntities();
+        private ICustomerService _service = new CustomerService( );
 
-        // GET: Customers
-        public ActionResult Index()
+        public CustomersController( )
         {
-            return View(db.Customers.ToList());
-        }
-
-        // GET: Customers/Details/5
-        public ActionResult Details(string id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Customers customers = db.Customers.Find(id);
-            if (customers == null)
-            {
-                return HttpNotFound();
-            }
-            return View(customers);
         }
 
         // GET: Customers/Create
-        public ActionResult Create()
+        public ActionResult Create( )
         {
-            return View();
+            return View( );
         }
 
         // POST: Customers/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "CustomerID,CompanyName,ContactName,ContactTitle,Address,City,Region,PostalCode,Country,Phone,Fax")] Customers customers)
+        public ActionResult Create( [Bind( Include = "CustomerID,CompanyName,ContactName,ContactTitle,Address,City,Region,PostalCode,Country,Phone,Fax" )] Customers customers )
         {
-            if (ModelState.IsValid)
+            if ( customers != null && ModelState.IsValid )
             {
-                db.Customers.Add(customers);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                _service.Create( customers );
+                return RedirectToAction( "Index" );
             }
 
-            return View(customers);
-        }
-
-        // GET: Customers/Edit/5
-        public ActionResult Edit(string id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Customers customers = db.Customers.Find(id);
-            if (customers == null)
-            {
-                return HttpNotFound();
-            }
-            return View(customers);
-        }
-
-        // POST: Customers/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "CustomerID,CompanyName,ContactName,ContactTitle,Address,City,Region,PostalCode,Country,Phone,Fax")] Customers customers)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(customers).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(customers);
+            return View( customers );
         }
 
         // GET: Customers/Delete/5
-        public ActionResult Delete(string id)
+        public ActionResult Delete( string id )
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Customers customers = db.Customers.Find(id);
-            if (customers == null)
-            {
-                return HttpNotFound();
-            }
-            return View(customers);
+            if ( id == null )
+                return new HttpStatusCodeResult( HttpStatusCode.BadRequest );
+
+            var customers = _service.GetByID( id );
+
+            if ( customers == null )
+                return HttpNotFound( );
+
+            return View( customers );
         }
 
         // POST: Customers/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost, ActionName( "Delete" )]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(string id)
+        public ActionResult DeleteConfirmed( string id )
         {
-            Customers customers = db.Customers.Find(id);
-            db.Customers.Remove(customers);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            _service.Delete( id );
+            return RedirectToAction( "Index" );
         }
 
-        protected override void Dispose(bool disposing)
+        // GET: Customers/Details/5
+        public ActionResult Details( string id )
         {
-            if (disposing)
+            if ( id == null )
+                return new HttpStatusCodeResult( HttpStatusCode.BadRequest );
+
+            var customers = _service.GetByID( id );
+
+            if ( customers == null )
+                return HttpNotFound( );
+
+            return View( customers );
+        }
+
+        // GET: Customers/Edit/5
+        public ActionResult Edit( string id )
+        {
+            if ( id == null )
+                return new HttpStatusCodeResult( HttpStatusCode.BadRequest );
+
+            var customers = _service.GetByID( id );
+
+            if ( customers == null )
+                return HttpNotFound( );
+
+            return View( customers );
+        }
+
+        // POST: Customers/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit( [Bind( Include = "CustomerID,CompanyName,ContactName,ContactTitle,Address,City,Region,PostalCode,Country,Phone,Fax" )] Customers customers )
+        {
+            if ( customers != null && ModelState.IsValid )
             {
-                db.Dispose();
+                _service.Update( customers );
+                return RedirectToAction( "Index" );
             }
-            base.Dispose(disposing);
+            return View( customers );
+        }
+
+        // GET: Customers
+        public ActionResult Index( )
+        {
+            return View( _service.GetCustomers( ) );
+        }
+
+        protected override void Dispose( bool disposing )
+        {
+            if ( disposing )
+                _service.Dispose( );
+
+            base.Dispose( disposing );
         }
     }
 }

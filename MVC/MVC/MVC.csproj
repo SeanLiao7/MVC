@@ -244,6 +244,8 @@
     <Compile Include="Region.cs">
       <DependentUpon>NorthWindModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Service\CustomerService.cs" />
+    <Compile Include="Service\ICustomerService.cs" />
     <Compile Include="Shippers.cs">
       <DependentUpon>NorthWindModel.tt</DependentUpon>
     </Compile>
