@@ -1,7 +1,10 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
+using MVC.Models;
 using MVC.Service;
 
 namespace MVC.Controllers
@@ -100,6 +103,28 @@ namespace MVC.Controllers
                 return RedirectToAction( "Index" );
             }
             return View( customers );
+        }
+
+        [HttpPost]
+        public ActionResult Index( SearchModel searchModel )
+        {
+            var isFuzzySearch = searchModel.isFuzzySearch;
+            var searchTarget = searchModel.SearchTarget;
+            var allCustomers = _service.GetCustomers( );
+            var result = default( IQueryable<Customers> );
+
+            if ( string.IsNullOrWhiteSpace( searchTarget ) )
+                result = allCustomers;
+            else if ( isFuzzySearch )
+                result = from customer in allCustomers
+                         where customer.CompanyName.Contains( searchTarget )
+                         select customer;
+            else
+                result = from customer in allCustomers
+                         where customer.CompanyName == searchTarget
+                         select customer;
+
+            return View( result );
         }
 
         // GET: Customers
