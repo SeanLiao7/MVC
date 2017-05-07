@@ -121,11 +121,6 @@ namespace MVC.Controllers
             return View( _service.GetCustomers( searchServie ) );
         }
 
-        public ActionResult Previous( )
-        {
-            return Redirect( Request.UrlReferrer.ToString( ) );
-        }
-
         protected override void Dispose( bool disposing )
         {
             if ( disposing )
