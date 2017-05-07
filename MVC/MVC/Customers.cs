@@ -40,10 +40,8 @@ namespace MVC
         [StringLength( 15, ErrorMessage = "Country length must not be greater than 15" )]
         public string Country { get; set; }
         [StringLength( 24, ErrorMessage = "Phone length must not be greater than 24" )]
-        [RegularExpression("[0-9]+",ErrorMessage = "Invalid Phone Number")]
         public string Phone { get; set; }
         [StringLength( 24, ErrorMessage = "Fax length must not be greater than 24" )]
-        [RegularExpression( "[0-9]+", ErrorMessage = "Invalid Phone Number" )]
         public string Fax { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly" )]

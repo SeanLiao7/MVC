@@ -11,7 +11,7 @@ namespace MVC.Controllers
 {
     public class CustomersController : Controller
     {
-        private ICustomerService _service = new CustomerService( );
+        private IGenericService<Customers> _service = new CustomerService( );
 
         public CustomersController( )
         {
@@ -108,21 +108,8 @@ namespace MVC.Controllers
         [HttpPost]
         public ActionResult Index( SearchModel searchModel )
         {
-            var isFuzzyComparison = searchModel.IsFuzzyComparison;
-            var searchTarget = searchModel.SearchTarget;
-            var allCustomers = _service.GetCustomers( );
-            var result = default( IQueryable<Customers> );
-
-            if ( string.IsNullOrWhiteSpace( searchTarget ) )
-                result = allCustomers;
-            else if ( isFuzzyComparison )
-                result = from customer in allCustomers
-                         where customer.CompanyName.Contains( searchTarget )
-                         select customer;
-            else
-                result = from customer in allCustomers
-                         where customer.CompanyName == searchTarget
-                         select customer;
+            var searchServie = CustomerSearchServiceFactory.CreateSearchService( searchModel );
+            var result = _service.GetCustomers( searchServie );
 
             return View( result );
         }
@@ -130,7 +117,13 @@ namespace MVC.Controllers
         // GET: Customers
         public ActionResult Index( )
         {
-            return View( _service.GetCustomers( ) );
+            var searchServie = CustomerSearchServiceFactory.CreateSearchService( );
+            return View( _service.GetCustomers( searchServie ) );
+        }
+
+        public ActionResult Previous( )
+        {
+            return Redirect( Request.UrlReferrer.ToString( ) );
         }
 
         protected override void Dispose( bool disposing )

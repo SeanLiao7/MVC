@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace MVC.Service
 {
-    public class CustomerService : ICustomerService
+    public class CustomerService : IGenericService<Customers>
     {
         private NORTHWNDEntities _db = new NORTHWNDEntities( );
 
@@ -31,9 +31,9 @@ namespace MVC.Service
             return _db.Customers.Find( customerID );
         }
 
-        public IQueryable<Customers> GetCustomers( )
+        public IQueryable<Customers> GetCustomers( IGenericeSearchService<Customers> customerSearchService )
         {
-            return _db.Customers;
+            return customerSearchService.Search( );
         }
 
         public void Update( Customers instance )
