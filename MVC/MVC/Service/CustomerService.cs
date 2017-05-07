@@ -11,6 +11,7 @@ namespace MVC.Service
         public void Create( Customers instance )
         {
             _db.Customers.Add( instance );
+            _db.Entry( instance ).State = EntityState.Added;
             SaveDB( );
         }
 
@@ -18,6 +19,7 @@ namespace MVC.Service
         {
             var customers = GetByID( customerID );
             _db.Customers.Remove( customers );
+            _db.Entry( customers ).State = EntityState.Deleted;
             SaveDB( );
         }
 

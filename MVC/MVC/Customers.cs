@@ -21,9 +21,10 @@ namespace MVC
             this.Orders = new HashSet<Orders>( );
             this.CustomerDemographics = new HashSet<CustomerDemographics>( );
         }
-
+        [Required]
         [StringLength( 5, ErrorMessage = "CustomerID length must be 5", MinimumLength = 5 )]
         public string CustomerID { get; set; }
+        [Required]
         [StringLength( 40, ErrorMessage = "CompanyName length must not be greater than 40" )]
         public string CompanyName { get; set; }
         [StringLength( 30, ErrorMessage = "ContactName length must not be greater than 30" )]
