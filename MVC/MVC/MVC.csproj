@@ -250,7 +250,7 @@
     <Compile Include="Service\CustomerSearchService\CompanyNameSearchAllService.cs" />
     <Compile Include="Service\CustomerService.cs" />
     <Compile Include="Service\IGenericService.cs" />
-    <Compile Include="Service\IGenericSearchService.cs" />
+    <Compile Include="Service\CustomerSearchService\IGenericSearchService.cs" />
     <Compile Include="Service\CustomerSearchService\CustomerSearchServiceFactory.cs" />
     <Compile Include="Shippers.cs">
       <DependentUpon>NorthWindModel.tt</DependentUpon>
