@@ -108,14 +108,14 @@ namespace MVC.Controllers
         [HttpPost]
         public ActionResult Index( SearchModel searchModel )
         {
-            var isFuzzySearch = searchModel.isFuzzySearch;
+            var isFuzzyComparison = searchModel.IsFuzzyComparison;
             var searchTarget = searchModel.SearchTarget;
             var allCustomers = _service.GetCustomers( );
             var result = default( IQueryable<Customers> );
 
             if ( string.IsNullOrWhiteSpace( searchTarget ) )
                 result = allCustomers;
-            else if ( isFuzzySearch )
+            else if ( isFuzzyComparison )
                 result = from customer in allCustomers
                          where customer.CompanyName.Contains( searchTarget )
                          select customer;
