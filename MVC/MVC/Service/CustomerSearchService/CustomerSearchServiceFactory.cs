@@ -11,13 +11,13 @@ namespace MVC.Service
         public static IGenericeSearchService<Customers> CreateSearchService( SearchModel searchModel = null )
         {
             if ( searchModel == null )
-                return new CompanyNameSearchAllService( searchModel );
+                return new CompanyNameSearchAllService( );
 
             var isFuzzyComparison = searchModel.IsFuzzyComparison;
             var searchTarget = searchModel.SearchTarget;
 
             if ( string.IsNullOrWhiteSpace( searchTarget ) )
-                return new CompanyNameSearchAllService( searchModel );
+                return new CompanyNameSearchAllService( );
             else if ( isFuzzyComparison )
                 return new CompanyNameFuzzySearchService( searchModel );
             else

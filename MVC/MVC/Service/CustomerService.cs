@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using MVC.UnitTest;
 
 namespace MVC.Service
 {
@@ -18,6 +20,7 @@ namespace MVC.Service
         public void Delete( string customerID )
         {
             var customers = GetByID( customerID );
+            customers.Orders.ToList( ).ForEach( c => customers.Orders.Remove( c ) );
             _db.Customers.Remove( customers );
             _db.Entry( customers ).State = EntityState.Deleted;
             SaveDB( );
@@ -33,9 +36,9 @@ namespace MVC.Service
             return _db.Customers.Find( customerID );
         }
 
-        public IQueryable<Customers> GetCustomers( IGenericeSearchService<Customers> customerSearchService )
+        public IEnumerable<Customers> GetCustomers( IGenericeSearchService<Customers> customerSearchService )
         {
-            return customerSearchService.Search( );
+            return customerSearchService.Search( new CustomerEntity( ) );
         }
 
         public void Update( Customers instance )

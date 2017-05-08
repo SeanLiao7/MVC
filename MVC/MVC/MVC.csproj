@@ -265,6 +265,9 @@
     <Compile Include="Territories.cs">
       <DependentUpon>NorthWindModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="UnitTest\CustomerEntity.cs" />
+    <Compile Include="UnitTest\IDbContext.cs" />
+    <Compile Include="UnitTest\MockCustomerEntity.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />

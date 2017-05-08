@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace MVC.Service
@@ -11,7 +12,7 @@ namespace MVC.Service
 
         T GetByID( string customerID );
 
-        IQueryable<T> GetCustomers( IGenericeSearchService<T> searchService );
+        IEnumerable<T> GetCustomers( IGenericeSearchService<T> searchService );
 
         void Update( T instance );
     }

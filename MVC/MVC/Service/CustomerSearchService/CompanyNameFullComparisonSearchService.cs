@@ -1,18 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using MVC.Models;
+using MVC.UnitTest;
 
 namespace MVC.Service
 {
     public class CompanyNameFullComparisonSearchService : IGenericeSearchService<Customers>
     {
-        private NORTHWNDEntities _db = new NORTHWNDEntities( );
         private SearchModel _searchModel;
 
         public CompanyNameFullComparisonSearchService( SearchModel searchModel )
         {
+            if ( searchModel == null )
+                throw new ArgumentNullException( $"{nameof( searchModel )} is null !" );
+
             _searchModel = searchModel;
         }
 
@@ -20,9 +21,9 @@ namespace MVC.Service
         {
         }
 
-        public IQueryable<Customers> Search( )
+        public IQueryable<Customers> Search( IDbContext<Customers> db )
         {
-            return from customer in _db.Customers
+            return from customer in db.DBContext
                    where customer.CompanyName == _searchModel.SearchTarget
                    select customer;
         }
