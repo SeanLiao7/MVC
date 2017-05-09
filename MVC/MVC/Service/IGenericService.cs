@@ -8,9 +8,9 @@ namespace MVC.Service
     {
         void Create( T instance );
 
-        void Delete( string customerID );
+        void Delete( string id );
 
-        T GetByID( string customerID );
+        T GetByID( string id );
 
         IEnumerable<T> GetCustomers( IGenericeSearchService<T> searchService );
 
