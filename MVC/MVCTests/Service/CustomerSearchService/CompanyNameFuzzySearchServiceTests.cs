@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MVC.Models;
 using MVC.UnitTest;
+using Autofac;
 
 namespace MVC.Service.Tests
 {
@@ -14,14 +15,13 @@ namespace MVC.Service.Tests
     public class CompanyNameFuzzySearchServiceTests
     {
         private List<string> _expectedResult;
-        private SearchModel _searchModel = default( SearchModel );
-        private IDbContext<Customers> _target;
+        private IContainer _iContainer;
 
         [Test( )]
         public void CompanyNameFuzzySearchTest( )
         {
-            var searchService = CustomerSearchServiceFactory.CreateSearchService( _searchModel );
-            var searchResult = searchService.Search( _target );
+            var searchService = CustomerSearchServiceFactory.CreateSearchService( _iContainer.Resolve<SearchModel>( ) );
+            var searchResult = searchService.Search( _iContainer.Resolve<IDbContext<Customers>>( ) );
             var expectedCount = 2;
             var results = searchResult.ToList( );
 
@@ -38,45 +38,27 @@ namespace MVC.Service.Tests
         [SetUp]
         public void SetUp( )
         {
-            _target = new MockCustomerEntity
-                (
-                    new Customers
-                    {
-                        CustomerID = "12345",
-                        CompanyName = "Google",
-                        Country = "USA",
-                    },
-                    new Customers
-                    {
-                        CustomerID = "54321",
-                        CompanyName = "Facebook",
-                        Country = "Canada",
-                    },
-                    new Customers
-                    {
-                        CustomerID = "99867",
-                        CompanyName = "Microsoft",
-                        Country = "China",
-                    },
-                    new Customers
-                    {
-                        CustomerID = "98765",
-                        CompanyName = "cebo",
-                        Country = "India",
-                    }
-                );
+            var builder = new ContainerBuilder( );
+            builder.Register( c => new MockCustomerEntity( ) ).AsImplementedInterfaces( );
+            builder.Register( c => new SearchModel
+            {
+                SearchTarget = "eb",
+                IsFuzzyComparison = true
+            } );
+
+            _iContainer = builder.Build( );
 
             _expectedResult = new List<string>
             {
                 "Facebook",
                 "cebo"
             };
+        }
 
-            _searchModel = new SearchModel
-            {
-                SearchTarget = "eb",
-                IsFuzzyComparison = true
-            };
+        [TearDown( )]
+        public void TearDown( )
+        {
+            _iContainer.Dispose( );
         }
     }
 }
