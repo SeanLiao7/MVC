@@ -1,13 +1,9 @@
-﻿using NUnit.Framework;
-using MVC.Service;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Autofac;
 using MVC.Models;
 using MVC.UnitTest;
-using Autofac;
+using NUnit.Framework;
 
 namespace MVC.Service.Tests
 {

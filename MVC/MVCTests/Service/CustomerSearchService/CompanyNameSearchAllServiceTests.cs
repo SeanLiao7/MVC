@@ -1,13 +1,9 @@
-﻿using NUnit.Framework;
-using MVC.Service;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Autofac;
 using MVC.Models;
 using MVC.UnitTest;
-using Autofac;
+using NUnit.Framework;
 
 namespace MVC.Service.Tests
 {
@@ -39,7 +35,6 @@ namespace MVC.Service.Tests
         public void SetUp( )
         {
             var builder = new ContainerBuilder( );
-
             builder.Register( c => new MockCustomerEntity( ) ).AsImplementedInterfaces( );
             builder.Register( c => new SearchModel( ) );
             _iContainer = builder.Build( );
