@@ -7,7 +7,12 @@ namespace MVC.Service
 {
     public class CustomerService : IGenericService<Customers>
     {
-        private NORTHWNDEntities _db = new NORTHWNDEntities( );
+        private NORTHWNDEntities _db;
+
+        public CustomerService( NORTHWNDEntities db )
+        {
+            _db = db;
+        }
 
         public void Create( Customers instance )
         {

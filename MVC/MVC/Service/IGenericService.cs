@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace MVC.Service
 {
-    internal interface IGenericService<T> : IDisposable
+    public interface IGenericService<T> : IDisposable
     {
         void Create( T instance );
 

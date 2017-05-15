@@ -7,10 +7,11 @@ namespace MVC.Controllers
 {
     public class CustomersController : Controller
     {
-        private IGenericService<Customers> _service = new CustomerService( );
+        private IGenericService<Customers> _service;
 
-        public CustomersController( )
+        public CustomersController( IGenericService<Customers> service )
         {
+            _service = service;
         }
 
         // GET: Customers/Create
