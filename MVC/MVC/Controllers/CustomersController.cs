@@ -106,7 +106,7 @@ namespace MVC.Controllers
         public ActionResult Index( SearchModel searchModel )
         {
             var searchServie = CustomerSearchServiceFactory.CreateSearchService( searchModel );
-            var result = _service.GetCustomers( searchServie );
+            var result = _service.GetItems( searchServie );
 
             return View( result );
         }
@@ -115,7 +115,7 @@ namespace MVC.Controllers
         public ActionResult Index( )
         {
             var searchServie = CustomerSearchServiceFactory.CreateSearchService( );
-            return View( _service.GetCustomers( searchServie ) );
+            return View( _service.GetItems( searchServie ) );
         }
 
         protected override void Dispose( bool disposing )

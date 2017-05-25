@@ -40,7 +40,7 @@ namespace MVC.Service
             return _db.Customers.Find( customerID );
         }
 
-        public IEnumerable<Customers> GetCustomers( IGenericeSearchService<Customers> customerSearchService )
+        public IEnumerable<Customers> GetItems( IGenericeSearchService<Customers> customerSearchService )
         {
             return customerSearchService.Search( new CustomerEntity( ) );
         }

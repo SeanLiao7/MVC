@@ -11,7 +11,7 @@ namespace MVC.Service
 
         T GetByID( string id );
 
-        IEnumerable<T> GetCustomers( IGenericeSearchService<T> searchService );
+        IEnumerable<T> GetItems( IGenericeSearchService<T> searchService );
 
         void Update( T instance );
     }
