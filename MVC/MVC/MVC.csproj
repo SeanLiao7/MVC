@@ -365,7 +365,7 @@
     </Compile>
     <Compile Include="UnitTest\CustomerEntity.cs" />
     <Compile Include="UnitTest\IDbContext.cs" />
-    <Compile Include="UnitTest\MockCustomerEntity.cs" />
+    <Compile Include="UnitTest\FakeCustomerEntity.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\Elmah.Errors\ElmahErrors.txt" />

@@ -35,7 +35,7 @@ namespace MVC.Service.Tests
         public void SetUp( )
         {
             var builder = new ContainerBuilder( );
-            builder.Register( c => new MockCustomerEntity( ) ).AsImplementedInterfaces( );
+            builder.Register( c => new FakeCustomerEntity( ) ).AsImplementedInterfaces( );
             builder.Register( c => new SearchModel
             {
                 SearchTarget = "eb",

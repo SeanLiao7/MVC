@@ -4,21 +4,21 @@ using MVC.Extensions;
 
 namespace MVC.UnitTest
 {
-    public class MockCustomerEntity : IDbContext<Customers>
+    public class FakeCustomerEntity : IDbContext<Customers>
     {
         public IQueryable<Customers> DBContext
         {
             get
             {
-                return MockDBContext.AsQueryable( );
+                return FakeDBContext.AsQueryable( );
             }
         }
 
-        public List<Customers> MockDBContext { get; } = new List<Customers>( );
+        public List<Customers> FakeDBContext { get; } = new List<Customers>( );
 
-        public MockCustomerEntity( )
+        public FakeCustomerEntity( )
         {
-            MockDBContext.Add(
+            FakeDBContext.Add(
                     new Customers
                     {
                         CustomerID = "12345",
